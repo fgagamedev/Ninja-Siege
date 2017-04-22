@@ -16,6 +16,61 @@ set(SYSTEM_BIN_LIB_DIR ${SYSTEM_BIN_DIR}/lib)
 set(SYSTEM_BUILD_DIR ${BUILD_DIR}/${SYSTEM})
 set(SYSTEM_BUILD_LIB_SRC_DIR ${SYSTEM_BUILD_DIR}/lib/src)
 
+subdirs(src)
+
+
+# External projects
+include(ExternalProject)
+
+## SDL
+set(SDL_PREFIX ${SYSTEM_LIB_DIR}/SDL-1.2)
+set(SDL_INCLUDE_DIR ${SDL_PREFIX}/include)
+
+ExternalProject_Add(
+    SDL
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL-1.2.15.tar.gz
+    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${PATCHES_DIR}/SDL/SDL_x11sym.h ${SYSTEM_BUILD_LIB_SRC_DIR}/SDL/src/video/x11/SDL_x11sym.h
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} ${SDL_CONFIGURE_OPTIONS}
+    BUILD_COMMAND $(MAKE)
+    INSTALL_COMMAND $(MAKE) install
+)
+
+# ## SDL_image
+ExternalProject_Add(
+    SDL_image
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL_image-1.2.12.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_IMAGE_CONFIGURE_OPTIONS}
+    BUILD_COMMAND $(MAKE)
+    INSTALL_COMMAND $(MAKE) install
+)
+
+# ## FreeType
+# set(FREETYPE_PREFIX ${SYSTEM_LIB_DIR}/FreeType-2.4)
+# set(FREETYPE_INCLUDE_DIR ${FREETYPE_PREFIX}/include ${FREETYPE_PREFIX}/include/freetype2)
+
+# ExternalProject_Add(
+#     FreeType
+#     PREFIX lib
+#     URL ${LIB_SRC_DIR}/freetype-2.4.0.tar.gz
+#     CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${FREETYPE_PREFIX} ${FREETYPE_CONFIGURE_OPTIONS}
+#     BUILD_COMMAND $(MAKE)
+#     INSTALL_COMMAND $(MAKE) install
+# )
+
+# ## SDL_ttf
+# ExternalProject_Add(
+#     SDL_ttf
+#     DEPENDS FreeType
+#     PREFIX lib
+#     URL ${LIB_SRC_DIR}/SDL_ttf-2.0.11.tar.gz
+#     CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-freetype-prefix=${FREETYPE_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS}
+#     BUILD_COMMAND $(MAKE)
+#     INSTALL_COMMAND $(MAKE) install
+# )
+
+
 # # Author: Edson Alves - edsonalves@unb.br
 # # Date: 21/12/2012
 
