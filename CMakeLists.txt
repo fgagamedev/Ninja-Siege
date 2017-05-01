@@ -1,14 +1,16 @@
-cmake_minimum_required(VERSION 2.8)
-cmake_policy(SET CMP0001 NEW)
+cmake_minimum_required(VERSION 2.6)
+cmake_policy(SET CMP0011 NEW)
 project(ninjasiege)
 
-set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/maker)
+# Project directories
+set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(BIN_DIR ${ROOT_DIR}/bin)
 set(BUILD_DIR ${ROOT_DIR}/build)
-set(LIB_DIR ${BUILD_DIR}/lib)
+set(LIB_DIR ${ROOT_DIR}/lib)
 set(LIB_SRC_DIR ${LIB_DIR}/src)
 set(PATCHES_DIR ${LIB_DIR}/patches)
 
+# System directories
 set(SYSTEM_DIR ${ROOT_DIR}/${SYSTEM})
 set(SYSTEM_LIB_DIR ${LIB_DIR}/${SYSTEM})
 set(SYSTEM_BIN_DIR ${BIN_DIR}/${SYSTEM})
@@ -16,15 +18,12 @@ set(SYSTEM_BIN_LIB_DIR ${SYSTEM_BIN_DIR}/lib)
 set(SYSTEM_BUILD_DIR ${BUILD_DIR}/${SYSTEM})
 set(SYSTEM_BUILD_LIB_SRC_DIR ${SYSTEM_BUILD_DIR}/lib/src)
 
-subdirs(src)
-
-
 # External projects
 include(ExternalProject)
 
 ## SDL
 set(SDL_PREFIX ${SYSTEM_LIB_DIR}/SDL-1.2)
-set(SDL_INCLUDE_DIR ${SDL_PREFIX}/include)
+set(SDL_INCLUDE_DIR ${SDL_PREFIX}/include/SDL)
 
 ExternalProject_Add(
     SDL
@@ -36,7 +35,7 @@ ExternalProject_Add(
     INSTALL_COMMAND $(MAKE) install
 )
 
-# ## SDL_image
+## SDL_image
 ExternalProject_Add(
     SDL_image
     PREFIX lib
@@ -46,61 +45,51 @@ ExternalProject_Add(
     INSTALL_COMMAND $(MAKE) install
 )
 
-# ## FreeType
-# set(FREETYPE_PREFIX ${SYSTEM_LIB_DIR}/FreeType-2.4)
-# set(FREETYPE_INCLUDE_DIR ${FREETYPE_PREFIX}/include ${FREETYPE_PREFIX}/include/freetype2)
+## SDL_image
+ExternalProject_Add(
+    SDL_mixer
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL_mixer-1.2.12.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_MIXER_CONFIGURE_OPTIONS}
+    BUILD_COMMAND $(MAKE)
+    INSTALL_COMMAND $(MAKE) install
+)
 
-# ExternalProject_Add(
-#     FreeType
-#     PREFIX lib
-#     URL ${LIB_SRC_DIR}/freetype-2.4.0.tar.gz
-#     CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${FREETYPE_PREFIX} ${FREETYPE_CONFIGURE_OPTIONS}
-#     BUILD_COMMAND $(MAKE)
-#     INSTALL_COMMAND $(MAKE) install
-# )
+## FreeType
+set(FREETYPE_PREFIX ${SYSTEM_LIB_DIR}/FreeType-2.4)
+set(FREETYPE_INCLUDE_DIR ${FREETYPE_PREFIX}/include ${FREETYPE_PREFIX}/include/freetype2)
 
-# ## SDL_ttf
-# ExternalProject_Add(
-#     SDL_ttf
-#     DEPENDS FreeType
-#     PREFIX lib
-#     URL ${LIB_SRC_DIR}/SDL_ttf-2.0.11.tar.gz
-#     CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-freetype-prefix=${FREETYPE_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS}
-#     BUILD_COMMAND $(MAKE)
-#     INSTALL_COMMAND $(MAKE) install
-# )
+ExternalProject_Add(
+    FreeType
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/freetype-2.4.0.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${FREETYPE_PREFIX} ${FREETYPE_CONFIGURE_OPTIONS}
+    BUILD_COMMAND $(MAKE)
+    INSTALL_COMMAND $(MAKE) install
+)
 
+## SDL_ttf
+ExternalProject_Add(
+    SDL_ttf
+    DEPENDS FreeType
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL_ttf-2.0.11.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-freetype-prefix=${FREETYPE_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS}
+    BUILD_COMMAND $(MAKE)
+    INSTALL_COMMAND $(MAKE) install
+)
 
-# # Author: Edson Alves - edsonalves@unb.br
-# # Date: 21/12/2012
+# Game
+subdirs(src)
 
-# # Library description
-# lib_LTLIBRARIES =
+# Packing
+set(CPACK_PACKAGE_NAME "ninja")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+set(CPACK_PACKAGE_VERSION_PATCH "1")
+set(CPACK_PACKAGE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
 
-# # Programs excluded from instalation
-# bin_PROGRAMS = ninjasiege
+set(CPACK_PACKAGING_INSTALL_PREFIX "/usr/games")
+set(CPACK_GENERATOR "DEB")
 
-# # Library flags
-# # libitem_la_LDFLAGS = -static
-
-# # Library sources
-# # libitem_la_SOURCES =
-
-# # Libraries needed to build our library
-# # libitem_la_LIBADD =
-
-# # Program description
-# ninjasiege_SOURCES = main.cpp mapa.cpp jogo.cpp tela.cpp escutavel.cpp tempo.cpp ambiente.cpp \
-# 					 jogo_detectarSaidaAplicativo.cpp jogo_detectarTodosEventos.cpp jogo_estadoEntradaJogo.cpp \
-# 					 jogo_estadoFimJogo.cpp jogo_estadoJogando.cpp jogo_estadoMenuJogo.cpp \
-# 					 jogo_estadoSairAplicativo.cpp jogo_desenharTudo.cpp \
-# 					 torre.cpp inimigo.cpp fading.cpp jogo_fazerTodaLogica.cpp \
-# 					 mestre.cpp wave.cpp ataque.cpp \
-# 					 util.cpp botao.cpp hud.cpp jogo_estadosInternos.cpp menuprincipal.cpp
-
-# # Libraries needed to build program
-# ninjasiege_LDADD = -lSDL -lSDL_ttf -lSDL_image -lSDL_mixer -lm
-
-# # Include flags
-# INCLUDES = -I../include -Wall -Wno-long-long -W -pedantic -ansi
-
+include(CPack)
