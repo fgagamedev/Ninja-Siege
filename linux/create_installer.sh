@@ -9,6 +9,7 @@
 SYSTEM=linux
 CUR_DIR=`pwd`
 BUILD_DIR=build/$SYSTEM
+BIN_DIR=bin/$SYSTEM
 DIST_DIR=dist/$SYSTEM
 DIST_BIN_DIR=$DIST_DIR/bin
 
@@ -26,16 +27,17 @@ function debian_package
 }
 
 # Generates a Qt installer (user friendly)
-QT_PACKAGE_DATA_DIR=dist/$SYSTEM/packages/jtj/data
+QT_PACKAGE_DATA_DIR=dist/$SYSTEM/packages/ninja/data
 function qt_package
 {
     echo "Building Qt package..."
     mkdir -p $QT_PACKAGE_DATA_DIR
     rm -f $QT_PACKAGE_DATA_DIR/*.7z
-    archivegen data.7z $BIN_DIR resources
+    echo $BIN_DIR
+    Qt/QtIFW2.0.5/bin/archivegen data.7z $BIN_DIR media
     mv data.7z $QT_PACKAGE_DATA_DIR
     cd $DIST_DIR
-    binarycreator -c config/config.xml -p packages ninjasiegeSetup.sh
+    ../../Qt/QtIFW2.0.5/bin/binarycreator -c config/config.xml -p packages ninjasiegeSetup.sh
     cd $CUR_DIR
     mv $DIST_DIR/*.sh $DIST_BIN_DIR
     echo "Done"
