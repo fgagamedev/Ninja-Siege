@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-	config.vm.box = "bento/debian-8.6"
+  config.vm.box = "../debian-xfce.box"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   #
   config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-  #  vb.gui = true
+    vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
     vb.memory = "2048"
@@ -69,9 +69,13 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
-  config.vm.provision "shell", inline: <<-SHELL
-     apt-get update
-     apt-get install build-essential git vim-gtk cmake -y
-     apt-get install automake -y
-  SHELL
+
+  # config.vm.provision "shell", inline: <<-SHELL
+  #    apt-get update
+  #    apt-get install build-essential git vim-gtk cmake -y
+  #    apt-get install automake -y
+  #    apt-get install xfce4 xorg-dev -y --force-yes
+  # SHELL
+
+  config.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime", run: "always"
 end
