@@ -4,11 +4,11 @@
 #include <tela.h>
 #include <string>
 #include <desenhavel.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL_mixer.h>
 
 using namespace std;
 
-class Fading : public Desenhavel
+class Fading final : public Desenhavel
 {
 private:
 	static const int DELAY_FRAMES_INCREMENTO_ALFA;
@@ -19,7 +19,7 @@ private:
 	bool tocouMusica;
 	Mix_Music * musicaFundo;
 
-public:	
+public:
 	Fading(string nomeImagem, string nomeMusica, int segundos);
 	~Fading();
 	int desenhar();

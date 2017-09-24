@@ -1,8 +1,8 @@
 #include <string>
 #include <fading.h>
 #include <ambiente.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 
 
 using namespace std;
@@ -36,14 +36,14 @@ Fading::~Fading()
 
 int Fading::desenhar()
 {
-	
-	
+
+
 	if ( (this->incremento > Fading::DELAY_FRAMES_INICIAR_INCREMENTO_ALFA) && (this->incremento % Fading::DELAY_FRAMES_INCREMENTO_ALFA == 0))
 	{
 		SDL_SetAlpha(this->imagem, SDL_SRCALPHA, this->alpha);
 		this->alpha++;
 		SDL_BlitSurface(this->imagem, NULL, SDL_GetVideoSurface(), this->rect);
-		
+
 		if (this->tocouMusica == false)
 		{
 			Mix_PlayMusic(this->musicaFundo, 1);
@@ -52,8 +52,8 @@ int Fading::desenhar()
 	}
 
 	this->incremento++;
-	
-	return 0; 	
+
+	return 0;
 }
 
 bool Fading::terminouFading()
@@ -61,5 +61,5 @@ bool Fading::terminouFading()
 	if(this->incremento >= Fading::quantidadeFramesTerminarFading)
 		return true;
 	else
-		return false;	
+		return false;
 }

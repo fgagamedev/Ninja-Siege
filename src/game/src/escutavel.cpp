@@ -1,4 +1,4 @@
 #include <escutavel.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 SDL_Event Escutavel::evento;

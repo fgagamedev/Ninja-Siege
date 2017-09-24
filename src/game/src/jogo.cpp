@@ -77,7 +77,7 @@ int Jogo::rodar()
 }
 
 bool Jogo::isTileOcupado(int x, int y){
-	for (int i = 0; i < mapa->tilesOcupados.size(); ++i)
+	for (size_t i = 0; i < mapa->tilesOcupados.size(); ++i)
 	{
 		if(mapa->tilesOcupados.at(i).x==x && mapa->tilesOcupados.at(i).y==y)
 			return true;

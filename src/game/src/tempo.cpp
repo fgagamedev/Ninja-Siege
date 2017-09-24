@@ -1,4 +1,4 @@
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <tempo.h>
 #include <tela.h>
 #include <iostream>
@@ -26,7 +26,7 @@ int Tempo::pegarTempoCorrido()
 void Tempo::atrasarTempo()
 {
     int atraso = this->pegarTempoCorrido();
-    
+
     if((1000 / Tela::FPS) > atraso)
         SDL_Delay((1000 / Tela::FPS) - atraso);
 }

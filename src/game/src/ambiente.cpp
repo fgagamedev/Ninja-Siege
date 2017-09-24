@@ -1,10 +1,10 @@
 #include <mapa.h>
 #include <stdlib.h>
 #include <ambiente.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
 
 #include <string>
 #include <iostream>
@@ -45,9 +45,9 @@ void Ambiente::carregarFonte()
 
 SDL_Surface * Ambiente::carregarTexto(string texto, TipoFonte tipo)
 {
-	SDL_Color colorFonte = {0, 0, 0}; // um cinza qualquer, soh pra funfar
+	SDL_Color colorFonte = {}; // um cinza qualquer, soh pra funfar
 
-	TTF_Font * fonte;
+	TTF_Font * fonte = NULL;
 
 	switch(tipo)
 	{
@@ -131,7 +131,7 @@ Mix_Music * Ambiente::carregarMusica(string caminho)
 
 	if(!musica)
 	{
-		cout << "Erro ao abrir musica: " << Mix_GetError << endl;
+		cout << "Erro ao abrir musica: " << Mix_GetError() << endl;
 		return NULL;
 	}
 

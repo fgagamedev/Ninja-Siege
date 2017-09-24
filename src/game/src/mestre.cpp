@@ -1,11 +1,11 @@
 #include <mestre.h>
 #include <ambiente.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 Mestre::Mestre(Mapa * mapaAtual)
 {
 	this->rect = new SDL_Rect;
-	this->rect->w = Mapa::TILE_WIDTH * 2;			
+	this->rect->w = Mapa::TILE_WIDTH * 2;
 	this->rect->h = Mapa::TILE_HEIGHT * 2;
 	this->rect->x = mapaAtual->tileSaida.x * (Mapa::TILE_WIDTH);
 	this->rect->y = mapaAtual->tileSaida.y * Mapa::TILE_HEIGHT;
@@ -23,7 +23,7 @@ int Mestre::fazerLogica()
 {
 	static bool praCima = true;
 	static int atraso = 0;
-	
+
 	if(atraso++ > 10)
 	{
 		if(praCima)

@@ -2,7 +2,7 @@
 #define ESCUTAVEL_H
 
 #include <desenhavel.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 class Escutavel : public Desenhavel
 {

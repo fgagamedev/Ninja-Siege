@@ -3,10 +3,10 @@
 
 #include <escutavel.h>
 #include <botao.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 
-class MenuPrincipal : public Escutavel
+class MenuPrincipal final : public Escutavel
 {
 private:
 	Botao * botaoNovoJogo;
@@ -15,7 +15,7 @@ private:
 	Botao * botaoConfiguracoes;
 	Botao * botaoCreditos;
 	Botao * botaoSair;
-	
+
 	SDL_Surface * desenho;
 	SDL_Rect desenhoRect;
 	SDL_Surface * logo;
@@ -23,7 +23,7 @@ private:
 	SDL_Surface * rodape;
 	SDL_Rect rodapeRect;
 	Mix_Music * musicaFundo;
-	
+
 public:
 	MenuPrincipal();
 	~MenuPrincipal();

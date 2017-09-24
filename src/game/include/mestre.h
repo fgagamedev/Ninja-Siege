@@ -6,11 +6,11 @@
 
 class Mapa;
 
-class Mestre : public Mutavel
+class Mestre final: public Mutavel
 {
 private:
 	int alcance;
-	
+
 public:
 	int fazerLogica();
 	int pontosVida;

@@ -3,9 +3,9 @@
 
 #include <tela.h>
 #include <desenhavel.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL_mixer.h>
 
-class LogoFading : public Desenhavel
+class LogoFading final : public Desenhavel
 {
 private:
 	static const int DELAY_FRAMES_INCREMENTO_ALFA;
@@ -15,7 +15,7 @@ private:
 	int incremento;
 	Mix_Music * musicaFundo;
 
-public:	
+public:
 	LogoFading();
 	~LogoFading();
 	int desenhar();

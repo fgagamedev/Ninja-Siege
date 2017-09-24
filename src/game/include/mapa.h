@@ -3,7 +3,7 @@
 
 #include <escutavel.h>
 #include <vector>
-#include <SDL/SDL_mixer.h>
+#include <SDL_mixer.h>
 
 struct PontoTile
 {
@@ -39,8 +39,8 @@ struct Ponto{
 	int y;
 };
 
-class Mapa : public Escutavel
-{	
+class Mapa final: public Escutavel
+{
 private:
 	PontoTile tileEntrada;
 	void configurarMapa();
@@ -56,7 +56,7 @@ public:
 	static const int TILE_HEIGHT;
 	static const int TILES_POR_LINHA;
 	static PontoTile tileSaida;
-	
+
 	TipoMapa tipo;
 	vector<Tile> * tiles;
 	vector<Ponto> tilesOcupados;
@@ -64,7 +64,7 @@ public:
 	~Mapa();
 	int desenhar();
 	int detectarEvento();
-	
+
 	friend class Inimigo;
 	friend class Mestre;
 };

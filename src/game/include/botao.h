@@ -2,7 +2,7 @@
 #define BOTAO_H
 
 #include <escutavel.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #include <string>
 #include <torre.h>
@@ -34,7 +34,7 @@ struct Preco : public Desenhavel
 	~Preco();
 };
 
-class Botao : public Escutavel
+class Botao final : public Escutavel
 {
 private:
 	string rotulo;
@@ -45,9 +45,9 @@ private:
 	int atrasoPiscaBotao; // SOMENTE PARA O BOTÃO DE INIT
 	bool mouseEstaSobre();
 	bool estaHabilitado();
-	
+
 public:
-	
+
 	// Construtores sem coordenadas: O CRIADOR DO BOTAO SE VIRA PARA POSICIONA-LO
 	Botao(string rotulo);
 	Botao(SDL_Surface * imagem);
@@ -56,9 +56,9 @@ public:
 	// Construtores mais complexos, contemplando as coordenadas do botao
 	Botao(int x, int y, int w, int h, string rotulo);
 	Botao(int x, int y, int w, int h, SDL_Surface * imagem);
-	
+
 	Preco * preco;
-	
+
 	~Botao();
 
 	int desenhar();

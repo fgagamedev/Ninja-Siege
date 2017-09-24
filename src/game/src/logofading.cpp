@@ -1,7 +1,7 @@
 #include <logofading.h>
 #include <ambiente.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 
 const int LogoFading::DELAY_FRAMES_INCREMENTO_ALFA = 3;
 const int LogoFading::DELAY_FRAMES_INICIAR_INCREMENTO_ALFA = 15;
@@ -32,13 +32,13 @@ LogoFading::~LogoFading()
 int LogoFading::desenhar()
 {
 	static bool tocouMusica = false;
-	
+
 	if ( (this->incremento > LogoFading::DELAY_FRAMES_INICIAR_INCREMENTO_ALFA) && (this->incremento % LogoFading::DELAY_FRAMES_INCREMENTO_ALFA == 0))
 	{
 		SDL_SetAlpha(this->imagem, SDL_SRCALPHA, this->alpha);
 		this->alpha++;
 		SDL_BlitSurface(this->imagem, NULL, SDL_GetVideoSurface(), this->rect);
-		
+
 		if (tocouMusica == false)
 		{
 			Mix_PlayMusic(this->musicaFundo, 1);
@@ -47,8 +47,8 @@ int LogoFading::desenhar()
 	}
 
 	this->incremento++;
-	
-	return 0; 	
+
+	return 0;
 }
 
 bool LogoFading::terminouFading()
@@ -56,5 +56,5 @@ bool LogoFading::terminouFading()
 	if(this->incremento >= LogoFading::QUANTIDADE_FRAMES_TERMINAR_FADING)
 		return true;
 	else
-		return false;	
+		return false;
 }

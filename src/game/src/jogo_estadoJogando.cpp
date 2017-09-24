@@ -10,19 +10,19 @@ using namespace std;
 
 int Jogo::configurarFaseAtual()
 {
-	this->inicioDeFase();	
-	
+	this->inicioDeFase();
+
 	this->vetorDesenhaveis =  new vector<Desenhavel *>;
 	this->vetorEscutaveis =  new vector<Escutavel *>;
 	this->vetorMutaveis =  new vector<Mutavel *>;
-	
+
 	Hud::resetarPontos();
-	
+
 	// Coloca o mapa na jogada
 	this->mapa = new Mapa(Util::mapaAtual);
 	this->vetorDesenhaveis->push_back(this->mapa);
 	this->vetorEscutaveis->push_back(this->mapa);
-	
+
 	// Coloca o mestre na jogada
 	this->mestre = new Mestre(this->mapa);
 	this->vetorDesenhaveis->push_back(this->mestre);
@@ -31,16 +31,17 @@ int Jogo::configurarFaseAtual()
 	// Coloca o hud na jogada
 	this->vetorDesenhaveis->push_back(this->hud);
 	this->vetorEscutaveis->push_back(this->hud);
-	
+
 	// Coloca a wave na jogada
 	this->wave = new Wave(Hud::numeradorWave, this->vetorDesenhaveis, this->vetorMutaveis, this->mapa, this->mestre);
+	return 0;
 }
 
 int Jogo::estadoJogando()
-{	
-	
+{
+
 	this->configurarFaseAtual();
-	
+
 	while(Util::estadoJogo == JOGANDO)
 	{
 		this->tempo->iniciarTempo();
@@ -48,16 +49,16 @@ int Jogo::estadoJogando()
 		if (Util::estadoInterno == PAUSADO)
 		{
 			this->estadoJogandoPausado();
-		} else 
+		} else
 		{
 			this->detectarTodosEventos();
 			this->fazerTodaLogica();
 			this->desenharTudo();
 		}
-		
+
 		this->tela->renderizar();
 		this->tempo->atrasarTempo();
 	}
-			
-	return 0;	
+
+	return 0;
 }

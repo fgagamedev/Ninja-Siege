@@ -4,10 +4,10 @@
 #include <escutavel.h>
 #include <tela.h>
 #include <botao.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
 
-class Hud : public Escutavel
+class Hud final : public Escutavel
 {
 private:
 	// Dimensoes do retangulo superior
@@ -15,7 +15,7 @@ private:
 	static const int WIDTH_PARTE_CIMA;
 
 	// Serve para pegar os numeros e escrever na tela de forma formatada
-	char informacoesTopo[256]; 
+	char informacoesTopo[256];
 
 
 	// Botoes de controle
@@ -39,18 +39,18 @@ private:
 public:
 	Hud();
 	~Hud();
-	
+
 	// Pontos
 	static int pontosXP;
 	static int pontosHP;
-	
+
 	// Esses dois abaixo servem para representar as waves que ja foram do total
 	// Ex: 6/20, ja foram 6 de 20
 	static int numeradorWave;
 	static int denominadorWave;
-	
+
 	static Botao * botaoPausa;
-	
+
 	int desenhar();
 	int detectarEvento();
 	int fazerLogica();
@@ -59,8 +59,8 @@ public:
 	static void atualizarHP(int pontosVidaMestre);
 	static void setarQuantidadeWaves(int denominador);
 	static void somarWave();
-	static void resetarPontos();	
-	
+	static void resetarPontos();
+
 	// Dimensoes do retangulo inferior
 	static const int HEIGHT_PARTE_BAIXO;
 	static const int WIDTH_PARTE_BAIXO;

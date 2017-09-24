@@ -5,7 +5,7 @@
 #include <tela.h>
 #include <botao.h>
 #include <stdio.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <iostream>
 
 using namespace std;
@@ -36,7 +36,7 @@ Hud::Hud()
 	this->botaoNinjaShuriken = new Botao(Ambiente::carregarImagem("botao_ninja_shuriken.png"),BOTAO_SHURIKEN);
 	this->botaoNinjaKunai 	 = new Botao(Ambiente::carregarImagem("botao_ninja_kunai.png"),BOTAO_KUNAI);
 	this->botaoNinjaBomba 	 = new Botao(Ambiente::carregarImagem("botao_ninja_bomba.png"),BOTAO_BOMBA);
-	
+
 	// Arruma a bagaca toda
 	this->rect = new SDL_Rect;
 	this->rect->x = 0;
@@ -59,27 +59,27 @@ int Hud::configurarHud()
     this->imagem = SDL_CreateRGBSurface(0, Tela::WIDTH, Tela::HEIGHT, Tela::BPP, 0, 0, 0, 0);
 	SDL_Rect retanguloParaTransparencia = {0, 0, Tela::WIDTH, Tela::HEIGHT};
 	SDL_FillRect(this->imagem, &retanguloParaTransparencia, SDL_MapRGB(this->imagem->format, 0xFF, 0, 0xFF));
-	
+
 	// Insere as duas barras
 	this->barra = Ambiente::carregarImagem("menu1.png");
-	
+
 	this->botaoIniciarWave->rect->x = 690;
 	this->botaoIniciarWave->rect->y = 0;
 	Hud::botaoPausa->rect->x = 750;
 	Hud::botaoPausa->rect->y = 0;
-	
-	
+
+
 	// Coloca os botoes em baixo
 	this->botaoNinjaKatana->rect->y = Tela::HEIGHT - Hud::HEIGHT_PARTE_BAIXO;
 	this->botaoNinjaKatana->rect->x = 10;
 	this->botaoNinjaKatana->preco->rect->y = this->botaoNinjaKatana->rect->y + 15;
 	this->botaoNinjaKatana->preco->rect->x = this->botaoNinjaKatana->rect->x + 40;
-	
+
 	this->botaoNinjaNunchaku->rect->x = this->botaoNinjaKatana->rect->x + this->botaoNinjaKatana->rect->w + Hud::BORDA_DIREITA;
 	this->botaoNinjaNunchaku->rect->y = this->botaoNinjaKatana->rect->y;
 	this->botaoNinjaNunchaku->preco->rect->x = this->botaoNinjaNunchaku->rect->x + 40;
 	this->botaoNinjaNunchaku->preco->rect->y = this->botaoNinjaNunchaku->rect->y + 15;
-	
+
 	this->botaoNinjaMariki->rect->x = this->botaoNinjaNunchaku->rect->x + this->botaoNinjaNunchaku->rect->w + Hud::BORDA_DIREITA;
 	this->botaoNinjaMariki->rect->y = this->botaoNinjaKatana->rect->y;
 	this->botaoNinjaMariki->preco->rect->x = this->botaoNinjaMariki->rect->x + 40;
@@ -102,7 +102,7 @@ int Hud::configurarHud()
 
 	// Coloca a colorkey para mostrar o mapa, que fica atras do hud
 	Uint32 colorkey = SDL_MapRGB(this->imagem->format, 0xFF, 0, 0xFF);
-	SDL_SetColorKey(this->imagem, SDL_SRCCOLORKEY, colorkey); 
+	SDL_SetColorKey(this->imagem, SDL_SRCCOLORKEY, colorkey);
 
 	return 0;
 }
@@ -116,15 +116,15 @@ void Hud::atualizarInformacoes()
 	sprintf(informacoesTopo, "HP %02i", Hud::pontosHP);
 	SDL_Surface * textoHP = Ambiente::carregarTexto(string(informacoesTopo), FONTE_HUD);
 	SDL_Rect retanguloHP = {255, 10, 0, 0};
-	
+
 	sprintf(informacoesTopo, "WAVE %02i/%02i", Hud::numeradorWave, Hud::denominadorWave);
 	SDL_Surface * textoWV = Ambiente::carregarTexto(string(informacoesTopo), FONTE_HUD);
 	SDL_Rect retanguloWV = {370, 10, 0, 0};
-	
+
 	SDL_BlitSurface(textoXP, NULL, SDL_GetVideoSurface(), &retanguloXP);
 	SDL_BlitSurface(textoHP, NULL, SDL_GetVideoSurface(), &retanguloHP);
 	SDL_BlitSurface(textoWV, NULL, SDL_GetVideoSurface(), &retanguloWV);
-	
+
 	SDL_FreeSurface(textoXP);
 	SDL_FreeSurface(textoHP);
 	SDL_FreeSurface(textoWV);
@@ -132,17 +132,17 @@ void Hud::atualizarInformacoes()
 
 int Hud::desenhar()
 {
-	SDL_Rect parteCima = {0, 0, Hud::WIDTH_PARTE_CIMA, Hud::HEIGHT_PARTE_CIMA};
-	SDL_Rect parteBaixo = {0, Tela::HEIGHT - Hud::HEIGHT_PARTE_BAIXO, 
-								Hud::WIDTH_PARTE_BAIXO, Hud::HEIGHT_PARTE_BAIXO};
+	SDL_Rect parteCima = {0, 0, Hud::WIDTH_PARTE_CIMA, static_cast<short>(Hud::WIDTH_PARTE_CIMA)};
+	SDL_Rect parteBaixo = {0, static_cast<short>(Tela::HEIGHT - Hud::HEIGHT_PARTE_BAIXO),
+								Hud::WIDTH_PARTE_BAIXO, static_cast<unsigned short>(Hud::HEIGHT_PARTE_BAIXO)};
 
 	SDL_BlitSurface(this->barra, NULL, this->imagem, &parteCima);
 	SDL_BlitSurface(this->barra, NULL, this->imagem, &parteBaixo);
 	SDL_BlitSurface(this->imagem, NULL, SDL_GetVideoSurface(), this->rect);
-	
+
 	//this->botaoProximaWave->desenhar();
 	Hud::botaoPausa->desenhar();
-	
+
 	this->atualizarInformacoes();
 	this->botaoNinjaKatana->desenhar();
 	this->botaoNinjaKunai->desenhar();
@@ -151,12 +151,12 @@ int Hud::desenhar()
 	this->botaoNinjaNunchaku->desenhar();
 	this->botaoNinjaBomba->desenhar();
 	this->botaoIniciarWave->desenhar();
-	
+
 	return 0;
 }
 
 int Hud::detectarEvento()
-{	
+{
 	Hud::botaoPausa->detectarEvento();
 	this->botaoIniciarWave->detectarEvento();
 	this->botaoNinjaKatana->detectarEvento();
@@ -165,7 +165,7 @@ int Hud::detectarEvento()
 	this->botaoNinjaMariki->detectarEvento();
 	this->botaoNinjaNunchaku->detectarEvento();
 	this->botaoNinjaBomba->detectarEvento();
-	
+
 	return 0;
 }
 
@@ -181,14 +181,14 @@ int Hud::fazerLogica()
 		else
 			Util::trocarEstadoInterno(Util::ultimoEstadoInterno);
 	}
-	
+
 	if (Hud::botaoIniciarWave->foiClicado() && Util::estadoInterno == TRANSICAO_WAVE)
 	{
 		Util::trocarEstadoInterno(OBSERVANDO);
 	}
-	
+
 	bool podeComprar = false;
-			
+
 	if (this->botaoNinjaShuriken->foiClicado() && Hud::pontosXP >= PRECO_SHURIKEN)
 	{
 		podeComprar = true;
@@ -203,7 +203,7 @@ int Hud::fazerLogica()
 	{
 		podeComprar = true;
 		Util::torreCompra = NUNCHAKU;
-	}	
+	}
 	else if (this->botaoNinjaMariki->foiClicado() && Hud::pontosXP >= PRECO_MARIKI)
 	{
 		podeComprar = true;
@@ -219,13 +219,13 @@ int Hud::fazerLogica()
 		podeComprar = true;
 		Util::torreCompra = BOMBA;
 	}
-	
+
 	if (podeComprar)
 	{
 		Util::trocarEstadoInterno(COMPRANDO);
 		Util::imagemCompra.configurarImagem(Util::torreCompra);
-	} 
-	
+	}
+
 	return 0;
 }
 

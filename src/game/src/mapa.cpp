@@ -1,5 +1,5 @@
 #include <vector>
-#include <SDL/SDL_mixer.h>
+#include <SDL_mixer.h>
 #include <mapa.h>
 #include <tela.h>
 #include <ambiente.h>
@@ -30,7 +30,7 @@ void Mapa::configurarMapa()
 			this->tiles = Ambiente::carregarConfiguracaoMapa("meetingRoom.map");
 			this->mascara = Ambiente::carregarImagem("mascara_sala_reuniao.png");
 			break;
-			
+
 		case SALA_ARTES_NEGRAS:
 			this->tiles = Ambiente::carregarConfiguracaoMapa("darkmagicRoom.map");
 			this->mascara = Ambiente::carregarImagem("mascara_artesnegras.png");
@@ -54,8 +54,8 @@ void Mapa::gerarSuperficieMapa()
 
 	int contX = 0;
 	int contY = 0;
-	
-	int tile_aux;
+
+	int tile_aux = 0;
 	for(int i=0;i<5;i++){
 		// 0 caminho
 		// 1 torre
@@ -86,7 +86,7 @@ void Mapa::gerarSuperficieMapa()
 		case SALA_REUNIAO:
 			tileset = Ambiente::carregarImagem("tileset_reuniao.png");
 			break;
-		
+
 		default:
 			tileset = Ambiente::carregarImagem("tileset_default.png");
 		break;
@@ -96,7 +96,7 @@ void Mapa::gerarSuperficieMapa()
 	SDL_Rect tileRect = {0, 0, Mapa::TILE_WIDTH, Mapa::TILE_HEIGHT};
 	bool achouEntrada = false;
 	bool achouSaida = false;
-	
+
 	for (int i = 0; i < Mapa::NUMERO_TOTAL_TILES; i++)
 	{
 		switch(this->tiles->at(i))
@@ -114,7 +114,7 @@ void Mapa::gerarSuperficieMapa()
 				tile_aux = 1;
 
 				break;
-			
+
 			case ENTRADA:
 				if(!achouEntrada)
 				{
@@ -124,7 +124,7 @@ void Mapa::gerarSuperficieMapa()
 				}
 				tile_aux = 4;
 				break;
-				
+
 			case SAIDA:
 				if(!achouSaida)
 				{
@@ -138,7 +138,7 @@ void Mapa::gerarSuperficieMapa()
 
 		tileRect.x = contX * Mapa::TILE_WIDTH;
 		tileRect.y = contY * Mapa::TILE_HEIGHT;
-		
+
 		SDL_BlitSurface(tileset, &clip[tile_aux], this->imagem, &tileRect);
 
 		contX++;
@@ -147,7 +147,7 @@ void Mapa::gerarSuperficieMapa()
 			contX = 0;
 			contY++;
 		}
-		
+
 	}
 
 	SDL_FreeSurface(tileset);
@@ -163,7 +163,7 @@ int Mapa::desenhar()
 
 int Mapa::detectarEvento()
 {
-	
+
 	return 0;
 }
 
@@ -180,7 +180,7 @@ Mapa::Mapa(TipoMapa tipo)
 	this->mascara = NULL;
 	this->configurarMapa();
 	this->gerarSuperficieMapa();
-	
+
 	switch(this->tipo)
 	{
 		case JARDIM_EXTERNO:
@@ -197,7 +197,7 @@ Mapa::Mapa(TipoMapa tipo)
 			this->tiles = Ambiente::carregarConfiguracaoMapa("meetingRoom.map");
 			this->musicaFundo = Ambiente::carregarMusica("SubSidised.mp3");
 			break;
-			
+
 		case SALA_ARTES_NEGRAS:
 			this->tiles = Ambiente::carregarConfiguracaoMapa("darkmagicRoom.map");
 			this->musicaFundo = Ambiente::carregarMusica("ZombiesAreComing.mp3");

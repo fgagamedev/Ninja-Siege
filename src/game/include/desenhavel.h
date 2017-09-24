@@ -1,7 +1,7 @@
 #ifndef DESENHAVEL_H
 #define DESENHAVEL_H
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 class Desenhavel
 {

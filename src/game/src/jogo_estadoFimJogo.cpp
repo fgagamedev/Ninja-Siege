@@ -3,7 +3,7 @@
 #include <util.h>
 #include <tela.h>
 #include <fading.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 
 int Jogo::estadoFimJogo()
@@ -11,13 +11,13 @@ int Jogo::estadoFimJogo()
 	this->vetorDesenhaveis =  new vector<Desenhavel *>;
 	this->vetorEscutaveis =  new vector<Escutavel *>;
 
-	Fading * gameOverFading = new Fading("game_over.png", "Without.mp3", 9);	
-		
+	Fading * gameOverFading = new Fading("game_over.png", "Without.mp3", 9);
+
 	this->vetorDesenhaveis->push_back(gameOverFading);
-	
+
 	while(Util::estadoJogo == FIM_JOGO)
 	{
-		
+
 		this->tempo->iniciarTempo();
 		this->detectarTodosEventos();
 		this->desenharTudo();
@@ -31,8 +31,8 @@ int Jogo::estadoFimJogo()
 	}
 	if (Util::estadoJogo != SAIDA_APLICATIVO)
 		Util::estadoJogo = MENU_PRINCIPAL;
-	
+
 	delete this->vetorDesenhaveis;
-	
+
 	return 0;
 }

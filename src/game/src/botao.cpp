@@ -1,6 +1,6 @@
 #include <botao.h>
 #include <ambiente.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <iostream>
 #include <util.h>
 #include <torre.h>
@@ -12,7 +12,7 @@ using namespace std;
 int Preco::desenhar()
 {
 	SDL_BlitSurface(this->imagem, NULL, SDL_GetVideoSurface(), this->rect);
-	
+
 	return 0;
 }
 
@@ -21,11 +21,11 @@ Preco::Preco(int preco)
 	this->rect = new SDL_Rect;
 	this->rect->x = -1;
 	this->rect->y = -1;
-	
+
 	char precoString [10];
 	sprintf(precoString, "%d", preco);
 	this->imagem = Ambiente::carregarTexto(string(precoString), FONTE_PRECO);
-	
+
 }
 
 Preco::~Preco()
@@ -44,7 +44,7 @@ Botao::Botao(string rotulo)
 
 	this->imagem = Ambiente::carregarTexto(rotulo, FONTE_HUD);
 
-	this->rect->w = imagem->w; 
+	this->rect->w = imagem->w;
 	this->rect->h = imagem->h;
 
 	this->clicado = false;
@@ -57,11 +57,11 @@ Botao::Botao(SDL_Surface * imagem)
 	this->rect->y = -1;
 
 	// Futuramente o width e o height podem ser independentes hehe
-	this->rect->w = imagem->w; 
+	this->rect->w = imagem->w;
 	this->rect->h = imagem->h;
-	
+
 	this->imagem = imagem;
-	this->clicado = false;	
+	this->clicado = false;
 }
 
 Botao::Botao(SDL_Surface * imagem, TipoBotao tipo)
@@ -71,13 +71,13 @@ Botao::Botao(SDL_Surface * imagem, TipoBotao tipo)
 	this->rect->y = 0;
 
 	// Futuramente o width e o height podem ser independentes hehe
-	this->rect->w = imagem->w; 
+	this->rect->w = imagem->w;
 	this->rect->h = imagem->h;
 	this->tipo = tipo;
-	
+
 	switch (this->tipo)
 	{
-		case BOTAO_SHURIKEN:	
+		case BOTAO_SHURIKEN:
 			this->preco = new Preco(PRECO_SHURIKEN);
 			break;
 		case BOTAO_KATANA:
@@ -103,12 +103,12 @@ Botao::Botao(SDL_Surface * imagem, TipoBotao tipo)
 
 	this->imagem = imagem;
 	this->clicado = false;
-	
+
 	this->frame = 0;
-	
+
 	this->clip[0].h = this->clip[1].h = this->imagem->h;
 	this->clip[0].w = this->clip[1].w = this->imagem->w/2;
-	
+
 	this->clip[0].y = this->clip[1].y = 0;
 	this->clip[0].x = 0;
 	this->clip[1].x = this->imagem->w/2;
@@ -121,12 +121,12 @@ Botao::Botao(int x, int y, int w, int h, string rotulo)
 	this->rect->y = y;
 
 	// duas linhas abaixo soh para tirar warnings
-	this->rect->w = w; 
+	this->rect->w = w;
 	this->rect->h = h;
 
 	// Futuramente o width e o height podem ser independentes hehe
 	this->imagem = Ambiente::carregarTexto(rotulo, FONTE_HUD);
-	this->rect->w = imagem->w; 
+	this->rect->w = imagem->w;
 	this->rect->h = imagem->h;
 
 	this->clicado = false;
@@ -139,11 +139,11 @@ Botao::Botao(int x, int y, int w, int h, SDL_Surface * imagem)
 	this->rect->y = y;
 
 	// duas linhas abaixo soh para tirar warnings
-	this->rect->w = w; 
+	this->rect->w = w;
 	this->rect->h = h;
 
 	// Futuramente o width e o height podem ser independentes hehe
-	this->rect->w = imagem->w; 
+	this->rect->w = imagem->w;
 	this->rect->h = imagem->h;
 
 	this->imagem = imagem;
@@ -159,48 +159,48 @@ Botao::~Botao()
 bool Botao::estaHabilitado()
 {
 	bool estaHabilitado = false;
-	
+
 	switch (this->tipo)
 	{
 		case BOTAO_SHURIKEN:
 			if (Hud::pontosXP >= PRECO_SHURIKEN)
 				estaHabilitado = true;
-			
+
 			break;
 		case BOTAO_KATANA:
 			if (Hud::pontosXP >= PRECO_KATANA)
 				estaHabilitado = true;
-			
+
 			break;
 		case BOTAO_NUNCHAKU:
 			if (Hud::pontosXP >= PRECO_NUNCHAKU)
 				estaHabilitado = true;
-			
+
 			break;
 		case BOTAO_MARIKI:
 			if (Hud::pontosXP >= PRECO_MARIKI)
 				estaHabilitado = true;
-			
+
 			break;
 		case BOTAO_KUNAI:
 			if (Hud::pontosXP >= PRECO_KUNAI)
 				estaHabilitado = true;
-			
+
 			break;
 		case BOTAO_BOMBA:
 			if (Hud::pontosXP >= PRECO_BOMBA)
 				estaHabilitado = true;
-			
+
 			break;
 		case BOTAO_INIT_WAVE:
 			if (Util::estadoInterno == TRANSICAO_WAVE || (Util::estadoInterno == COMPRANDO && Util::ultimoEstadoInterno == TRANSICAO_WAVE))
 				estaHabilitado = true;
-			
+
 			break;
 		default:
 			estaHabilitado =  true;
 	}
-	
+
 	return estaHabilitado;
 }
 
@@ -210,9 +210,9 @@ int Botao::desenhar()
 
 	if (!estaHabilitado())
 		alpha = 120;
-		
+
 	if(!mouseEstaSobre() && estaHabilitado() && this->tipo == BOTAO_INIT_WAVE)
-	{	
+	{
 		if (this->atrasoPiscaBotao == 0.5*Tela::FPS)
 		{
 			if(this->frame)
@@ -227,13 +227,13 @@ int Botao::desenhar()
 	{
 		if (this->preco)
 		{
-			SDL_BlitSurface(this->preco->imagem, NULL, SDL_GetVideoSurface(), this->preco->rect);	
-		}		
+			SDL_BlitSurface(this->preco->imagem, NULL, SDL_GetVideoSurface(), this->preco->rect);
+		}
 	}
-	
+
 	SDL_SetAlpha(this->imagem, SDL_SRCALPHA, alpha);
 	SDL_BlitSurface(this->imagem, &this->clip[frame], SDL_GetVideoSurface(), this->rect);
-	
+
 	return 0;
 }
 
@@ -243,15 +243,15 @@ bool Botao::mouseEstaSobre()
 	{
 		int x = Escutavel::evento.motion.x;
 		int y = Escutavel::evento.motion.y;
-		
+
 		if(this->rect->x <= x && x <= this->rect->x + this->rect->w &&
 				this->rect->y <= y && y <= this->rect->y + this->rect->h)
 			return true;
-		else 
+		else
 			return false;
-		
+
 	}
-	
+
 	return false;
 }
 
@@ -272,12 +272,12 @@ int Botao::detectarEvento()
 			}
 		}
 	}
-	
+
 	if (mouseEstaSobre())
 		this->frame = 1;
 	else
 		this->frame = 0;
-	
+
 	return 0;
 }
 
