@@ -50,7 +50,7 @@ int Jogo::inicioDeFase()
 	SDL_Rect logoRect = {145, 140, 0, 0};
 
 	SDL_Surface * mensagem = NULL;
-	SDL_Rect mensagemRect = {};
+	SDL_Rect mensagemRect = {0, 0, 0, 0};
 	switch (Util::mapaAtual)
 	{
 		case SALA_TREINAMENTO:

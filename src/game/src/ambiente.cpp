@@ -45,7 +45,7 @@ void Ambiente::carregarFonte()
 
 SDL_Surface * Ambiente::carregarTexto(string texto, TipoFonte tipo)
 {
-	SDL_Color colorFonte = {}; // um cinza qualquer, soh pra funfar
+	SDL_Color colorFonte = {0, 0, 0, 0}; // um cinza qualquer, soh pra funfar
 
 	TTF_Font * fonte = NULL;
 

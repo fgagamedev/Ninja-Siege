@@ -1,0 +1,4 @@
+dist/linux/debian/ninja-siege.6
+dist/linux/redhat/ninja-siege
+
+bin/
