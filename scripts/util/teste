@@ -1,0 +1,30 @@
+#! /bin/python
+import os
+
+
+def check_directory_for_file(base_dir):
+	for f in os.scandir(base_dir):
+		if f.is_dir():
+			print(f.path)
+			check_directory_for_file(f.path)
+		else:
+			print("\t" + f.path)
+			print("\t" + f.name)
+
+	# for FILE in $(ls $BASE_DIR);
+	# do
+	# 	FILE_PATH='$BASE_DIR/$FILE'
+	# 	echo $FILE_PATH
+	# 	if [ -d $FILE_PATH ];
+	# 	then
+	# 		echo '+++++++++++++++++++'
+	# 		append_directory_tag $FILE
+	# 		check_directory_for_file $FILE_PATH
+	# 		close_tag 'Directory'
+	# 	else
+	# 		append_component_tag $FILE
+	# 		append_file_tag $FILE_PATH
+	# 		close_tag 'Component'
+	# 	fi
+
+check_directory_for_file('resources')
