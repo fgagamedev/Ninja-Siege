@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+	<Product
+		Name="ninjaSiege 0.0.1"
+		Id="C2DDBF1C-13B5-4732-B5FD-2A22A5797D69"
+		UpgradeCode="6D8CA413-919E-4BCD-9D16-8A1A9A87AEB2"
+		Language='1046'
+		Codepage='1252'
+		Version="0.0.1"
+		Manufacturer='UnB Games'>
+	<Package
+		Id='*'
+		Keywords='Installer'
+		Description="ninjaSiege 0.0.1 installer"
+		Manufacturer='UnB Games'
+		InstallerVersion='100'
+		Languages='1046'
+		SummaryCodepage='1252'
+		Compressed='yes'/>
+
+		<Media
+			Id='1'
+			Cabinet='ninjaSiege.cab'
+			EmbedCab='yes'
+			DiskPrompt="Disk #1"
+		/>
+
+		<Property
+			Id='DiskPrompt'
+			Value="ninjaSiege 0.0.1 Installation [1]"
+		/>
+		<Directory Id='TARGETDIR' Name='SourceDir'>
+			<Directory Id='ProgramFilesFolder' Name='PFiles'>
+				<Directory Id='UnBGames' Name='UnB Games'>
+					<Directory Id='INSTALLDIR' Name="ninjaSiege 0.0.1">
+						<Component Id='MainExecutable' Guid="D0828C8D-0D63-42CC-8848-E9582B6C1F07">
+							<File
+								Id="ninjaSiege"
+								Name="ninjaSiege.exe"
+								DiskId='1'
+								Vital='yes'
+								Source="ninjaSiege.exe"
+								KeyPath='yes'>
+							</File>
+	<Shortcut
+		Id="ProgramMenuDirninjaSiege"
+		Directory="ProgramMenuDir"
+		Name="ninjaSiege 0.0.1"
+		WorkingDirectory='INSTALLDIR'
+		Icon="icon.bmp"
+		IconIndex="0"
+		Advertise="yes"/>
+	<Shortcut
+		Id="DESKTOPFOLDERDIRninjaSiege"
+		Directory="DESKTOPFOLDERDIR"
+		Name="ninjaSiege 0.0.1"
+		WorkingDirectory='INSTALLDIR'
+		Icon="icon.bmp"
+		IconIndex="0"
+		Advertise="yes"/>
+	</Component>
+	<Component Id="_SDL" Guid="2CB3855D-1CD4-4E8E-9DCA-ED5FAA35B5BE" KeyPath='yes'>
+	<File
+		Id="_LIBFLAC_8.DLL"
+		Name="libFLAC-8.dll"
+		DiskId='1'
+		Source="libFLAC-8.dll"/>
+	<File
+		Id="_LIBFREETYPE_6.DLL"
+		Name="libfreetype-6.dll"
+		DiskId='1'
+		Source="libfreetype-6.dll"/>
+	<File
+		Id="_LIBGCC_S_SEH_1.DLL"
+		Name="libgcc_s_seh-1.dll"
+		DiskId='1'
+		Source="libgcc_s_seh-1.dll"/>
+	<File
+		Id="_LIBJPEG_8.DLL"
+		Name="libjpeg-8.dll"
+		DiskId='1'
+		Source="libjpeg-8.dll"/>
+	<File
+		Id="_LIBMIKMOD_2.DLL"
+		Name="libmikmod-2.dll"
+		DiskId='1'
+		Source="libmikmod-2.dll"/>
+	<File
+		Id="_LIBOGG_0.DLL"
+		Name="libogg-0.dll"
+		DiskId='1'
+		Source="libogg-0.dll"/>
+	<File
+		Id="_LIBPNG15_15.DLL"
+		Name="libpng15-15.dll"
+		DiskId='1'
+		Source="libpng15-15.dll"/>
+	<File
+		Id="_LIBSTDC___6.DLL"
+		Name="libstdc++-6.dll"
+		DiskId='1'
+		Source="libstdc++-6.dll"/>
+	<File
+		Id="_LIBTIFF_5.DLL"
+		Name="libtiff-5.dll"
+		DiskId='1'
+		Source="libtiff-5.dll"/>
+	<File
+		Id="_LIBVORBIS_0.DLL"
+		Name="libvorbis-0.dll"
+		DiskId='1'
+		Source="libvorbis-0.dll"/>
+	<File
+		Id="_LIBVORBISFILE_3.DLL"
+		Name="libvorbisfile-3.dll"
+		DiskId='1'
+		Source="libvorbisfile-3.dll"/>
+	<File
+		Id="_LIBWEBP_2.DLL"
+		Name="libwebp-2.dll"
+		DiskId='1'
+		Source="libwebp-2.dll"/>
+	<File
+		Id="_LIBWINPTHREAD_1.DLL"
+		Name="libwinpthread-1.dll"
+		DiskId='1'
+		Source="libwinpthread-1.dll"/>
+	<File
+		Id="_LICENSE.FLAC.TXT"
+		Name="LICENSE.FLAC.txt"
+		DiskId='1'
+		Source="LICENSE.FLAC.txt"/>
+	<File
+		Id="_LICENSE.FREETYPE.TXT"
+		Name="LICENSE.freetype.txt"
+		DiskId='1'
+		Source="LICENSE.freetype.txt"/>
+	<File
+		Id="_LICENSE.JPEG.TXT"
+		Name="LICENSE.jpeg.txt"
+		DiskId='1'
+		Source="LICENSE.jpeg.txt"/>
+	<File
+		Id="_LICENSE.MIKMOD.TXT"
+		Name="LICENSE.mikmod.txt"
+		DiskId='1'
+		Source="LICENSE.mikmod.txt"/>
+	<File
+		Id="_LICENSE.OGG_VORBIS.TXT"
+		Name="LICENSE.ogg-vorbis.txt"
+		DiskId='1'
+		Source="LICENSE.ogg-vorbis.txt"/>
+	<File
+		Id="_LICENSE.PNG.TXT"
+		Name="LICENSE.png.txt"
+		DiskId='1'
+		Source="LICENSE.png.txt"/>
+	<File
+		Id="_LICENSE.SMPEG.TXT"
+		Name="LICENSE.smpeg.txt"
+		DiskId='1'
+		Source="LICENSE.smpeg.txt"/>
+	<File
+		Id="_LICENSE.TIFF.TXT"
+		Name="LICENSE.tiff.txt"
+		DiskId='1'
+		Source="LICENSE.tiff.txt"/>
+	<File
+		Id="_LICENSE.WEBP.TXT"
+		Name="LICENSE.webp.txt"
+		DiskId='1'
+		Source="LICENSE.webp.txt"/>
+	<File
+		Id="_README_SDL.TXT"
+		Name="README-SDL.txt"
+		DiskId='1'
+		Source="README-SDL.txt"/>
+	<File
+		Id="_SDL.DLL"
+		Name="SDL.dll"
+		DiskId='1'
+		Source="SDL.dll"/>
+	<File
+		Id="_SDL.LIB"
+		Name="SDL.lib"
+		DiskId='1'
+		Source="SDL.lib"/>
+	<File
+		Id="_SDL_IMAGE.DLL"
+		Name="SDL_image.dll"
+		DiskId='1'
+		Source="SDL_image.dll"/>
+	<File
+		Id="_SDL_IMAGE.LIB"
+		Name="SDL_image.lib"
+		DiskId='1'
+		Source="SDL_image.lib"/>
+	<File
+		Id="_SDL_MIXER.DLL"
+		Name="SDL_mixer.dll"
+		DiskId='1'
+		Source="SDL_mixer.dll"/>
+	<File
+		Id="_SDL_MIXER.LIB"
+		Name="SDL_mixer.lib"
+		DiskId='1'
+		Source="SDL_mixer.lib"/>
+	<File
+		Id="_SDL_TTF.DLL"
+		Name="SDL_ttf.dll"
+		DiskId='1'
+		Source="SDL_ttf.dll"/>
+	<File
+		Id="_SDL_TTF.LIB"
+		Name="SDL_ttf.lib"
+		DiskId='1'
+		Source="SDL_ttf.lib"/>
+	<File
+		Id="_SDLMAIN.LIB"
+		Name="SDLmain.lib"
+		DiskId='1'
+		Source="SDLmain.lib"/>
+	<File
+		Id="_SMPEG.DLL"
+		Name="smpeg.dll"
+		DiskId='1'
+		Source="smpeg.dll"/>
+	<File
+		Id="_ZLIB1.DLL"
+		Name="zlib1.dll"
+		DiskId='1'
+		Source="zlib1.dll"/>
+	</Component>
+	<Directory Id="RESOURCESDIR" Name="resources">
+	</Directory>
+	<Directory Id="RESOURCES/AUDIODIR" Name="resources/audio">
+	<Component Id="_RESOURCES/AUDIO/CORP_ON_ROAD.MP3" Guid="44B55B31-9F0B-4D79-81EE-D241670EA040" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	<Directory Id="RESOURCES/AUDIO/TESTEDIR" Name="resources/audio/teste">
+	<Component Id="_RESOURCES/AUDIO/TESTE/ASDFASD.TXT" Guid="7A243FBE-49C2-4057-8F9D-D4C232288691" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	<Directory Id="RESOURCES/AUDIODIR" Name="resources/audio">
+	<Component Id="_RESOURCES/AUDIO/THEME_MENU.MP3" Guid="EE8C4B84-62A7-424A-9607-5F860B817061" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	<Directory Id="RESOURCESDIR" Name="resources">
+	<Directory Id="RESOURCES/FONTDIR" Name="resources/font">
+	<Component Id="_RESOURCES/FONT/DEFAULT.TTF" Guid="9FFE5FD9-C5A3-4104-AEA6-CAC0161593A2" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	<Directory Id="RESOURCESDIR" Name="resources">
+	<Component Id="_RESOURCES/ICON.BMP" Guid="BE076622-C651-424B-B8DC-39BAD17A32C1" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	<Directory Id="RESOURCES/IMAGEDIR" Name="resources/image">
+	<Component Id="_RESOURCES/IMAGE/BOMBA.PNG" Guid="DFA1AB90-D1B6-4983-8E2A-02E641EC4D61" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	<Directory Id="RESOURCESDIR" Name="resources">
+	<Directory Id="RESOURCES/MAPSDIR" Name="resources/maps">
+	<Component Id="_RESOURCES/MAPS/DARKMAGICROOM.MAP" Guid="3EA9E12F-3CD0-41DA-9E4E-E88C24848787" KeyPath='yes'>
+	<File
+		Id="_"
+		Name=""
+		DiskId='1'
+		Source=""/>
+	</Component>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	<Directory Id="ProgramMenuFolder" Name="Programs">
+		<Directory Id="ProgramMenuDir" Name="ninjaSiege 0.0.1">
+			<Component Id="ProgramMenuDir" Guid="F2EAABA7-5729-4D75-8697-92A0D3364936">
+				<RemoveFolder
+					Id='ProgramMenuDir'
+					On='uninstall'/>
+				<RegistryValue
+					Root='HKCU'
+					Key='Software\[Manufacturer]\[ProductName]'
+					Type='string'
+					Value=''
+					KeyPath='yes'/>
+			</Component>
+		</Directory>
+	</Directory>
+	<Directory Id="DESKTOPFOLDERDIR" Name="DesktopFolder">
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	</Directory>
+	<Feature
+		Id="Complete"
+		Title='ninjaSiege%% 0.0.1%%'
+		Description='Ninja Siege Game - da equipe Z-One (Engenharia de Software - UnB)'
+		Display='expand'
+		Level='1'
+		ConfigurableDirectory='INSTALLDIR'>
+	<Feature
+		Id="MainExecutable"
+		Title='ninjaSiege%% 0.0.1%%'
+		Description='Ninja Siege Game - da equipe Z-One (Engenharia de Software - UnB)'
+		Display='expand'
+		Level='1'
+		ConfigurableDirectory='INSTALLDIR'>
+	<ComponentRef Id="MainExecutable" />
+	<ComponentRef Id="_SDL" />
+	<ComponentRef Id="_RESOURCES/AUDIO/CORP_ON_ROAD.MP3" />
+	<ComponentRef Id="_RESOURCES/AUDIO/TESTE/ASDFASD.TXT" />
+	<ComponentRef Id="_RESOURCES/AUDIO/THEME_MENU.MP3" />
+	<ComponentRef Id="_RESOURCES/FONT/DEFAULT.TTF" />
+	<ComponentRef Id="_RESOURCES/ICON.BMP" />
+	<ComponentRef Id="_RESOURCES/IMAGE/BOMBA.PNG" />
+	<ComponentRef Id="_RESOURCES/MAPS/DARKMAGICROOM.MAP" />
+	<ComponentRef Id="ProgramMenuDir" />
+	</Feature>
+	</Feature>
+	<UIRef Id="WixUI_InstallDir" />
+	<UIRef Id="WixUI_ErrorProgressText" />
+	<Property Id='WIXUI_INSTALLDIR' Value='INSTALLDIR' />
+	<Icon Id="icon.bmp" SourceFile="resources/icon.bmp" />
+	</Product>
+	</Wix>

@@ -185,12 +185,12 @@ Mapa::Mapa(TipoMapa tipo)
 	{
 		case JARDIM_EXTERNO:
 			this->tiles = Ambiente::carregarConfiguracaoMapa("externGarden.map");
-			this->musicaFundo = Ambiente::carregarMusica("Zander Noriega - Fight Them Until We Cant.mp3");
+			this->musicaFundo = Ambiente::carregarMusica("Fight_Them_Until_We_Cant.mp3");
 			break;
 
 		case SALA_TREINAMENTO:
 			this->tiles = Ambiente::carregarConfiguracaoMapa("trainingRoom.map");
-			this->musicaFundo = Ambiente::carregarMusica("Corp on Road.mp3");
+			this->musicaFundo = Ambiente::carregarMusica("Corp_on_Road.mp3");
 			break;
 
 		case SALA_REUNIAO:
@@ -205,7 +205,7 @@ Mapa::Mapa(TipoMapa tipo)
 
 		case SALA_GUARDA:
 			this->tiles = Ambiente::carregarConfiguracaoMapa("guardRoom.map");
-			this->musicaFundo = Ambiente::carregarMusica("War song.mp3");
+			this->musicaFundo = Ambiente::carregarMusica("War_song.mp3");
 			break;
 	}
 	Mix_VolumeMusic(80);
